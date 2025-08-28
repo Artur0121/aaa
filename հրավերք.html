@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Վարդան և Սեդա</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #333;
+    background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),
+                url('flowers-background.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Centerpiece slide container */
+  .slide-container {
+    position: relative;
+    max-width: 400px;
+    margin: 50px auto 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.35);
+  }
+
+  .slide-container img {
+    width: 100%;
+    height: auto;
+    display: none; /* Սկզբում ոչ մեկը չի երևում */
+  }
+
+  .slide-container img.active {
+    display: block;
+  }
+
+  /* Overlay տեքստ centerpiece-ի վրա */
+  .overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .overlay h1 { margin: 0; font-size: 22px; }
+  .overlay p { margin: 5px 0 0; font-size: 14px; }
+
+  /* Centerpiece-ի ներքևի հատվածը՝ հասցեներ, countdown և կոնտակտներ */
+  .location-info {
+    position: relative;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 15px;
+    padding: 15px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+
+  .location-info h2 { margin: 8px 0; font-size: 18px; color: #444; }
+  .location-info p { margin: 4px 0; font-size: 14px; color: #333; }
+
+  /* Clickable links */
+  .location-info a {
+    color: #0066cc;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .location-info a:hover {
+    color: #ff3366;
+  }
+
+  /* RSVP ֆորմա */
+  form {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  form input, form button {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  form button {
+    background-color: #0066cc;
+    color: white;
+    cursor: pointer;
+    border: none;
+  }
+
+  form button:hover {
+    background-color: #ff3366;
+  }
+
+  /* Scroll spacing */
+  body {
+    padding-bottom: 50px;
+  }
+</style>
+</head>
+<body>
+<audio id="weddingMusic" autoplay loop>
+  <source src="wedding-music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById('weddingMusic');
+
+  // Երբ օգտագործողը scroll անում է կամ սահեցնում է մատով
+  window.addEventListener('scroll', () => {
+    if(!music.paused) music.pause();
+  });
+
+  window.addEventListener('touchmove', () => {
+    if(!music.paused) music.pause();
+  });
+</script>
+
+</script>
+
+
+  <!-- Slide container -->
+  <div class="slide-container">
+    <img src="wedding1.jpg" class="active" alt="Հարսանիքի նկար 1">
+    <img src="wedding2.jpg" alt="Հարսանիքի նկար 2">
+    <img src="wedding3.jpg" alt="Հարսանիքի նկար 3">
+    <div class="overlay">
+      <h1>Վարդան և Սեդա</h1>
+      <p>Սիրով հրավիրում ենք Ձեզ մեր հարսանիքին 💍</p>
+    </div>
+  </div>
+
+  <!-- Ներքևի տեղեկություններ, scroll-ով -->
+  <div class="location-info">
+
+    <!-- Countdown -->
+    <h2>Մնացած օրերը մինչև հարսանիքը</h2>
+    <p id="countdown"></p>
+
+    <h2>Տեղ և Ժամ</h2>
+    <p>Հարսանիքը կկայանա <strong>Ջրվեժ, 25 Հոկտեմբերի, ժամը 17:30</strong></p>
+
+    <h2>Եկեղեցի</h2>
+    <p>
+      <a href="https://maps.app.goo.gl/4ZCH8aQ75vCAhLgH9" target="_blank">
+        Սուրբ Աստվածածին եկեղեցի
+      </a>
+    </p>
+
+    <h2>Ռեստորան</h2>
+    <p>
+      <a href="https://maps.app.goo.gl/1zCpRzGzi5cFXVAN9" target="_blank">
+        «Ղարս» ռեստորան, Ջրվեժ
+      </a>
+    </p>
+
+    <h2>Հեռախոսային Կոնտակտ</h2>
+    <p>Վարդան՝ 000-000000</p>
+    <p>Սեդա՝ 000-000000</p>
+
+    <h2>Հյուրերի համար</h2>
+    <p>Խնդրում ենք հաստատել մասնակցությունը մինչև Հոկտեմբերի 5-ը</p>
+
+   
+
+  </div>
+
+  <!-- JS: Countdown + Slide Show -->
+  <script>
+    // Countdown
+    const weddingDate = new Date("Oct 25, 2025 18:00:00").getTime();
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+      document.getElementById("countdown").innerHTML = Math.floor(distance/1000/60/60/24) + " օր";
+    }, 1000);
+
+    // Slide Show
+    const slides = document.querySelectorAll('.slide-container img');
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 3000); // փոխվում է ամեն 3 վայրկյան
+  </script>
+  
+
+</body>
+</html>
